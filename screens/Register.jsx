@@ -8,18 +8,7 @@ const Register = ({ navigation }) => {
 
   const onSubmit = async (data) => {
     try {
-      // Here you would typically make a request to your backend server
-      // For example:
-      // const response = await fetch('https://yourapi.com/register', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify(data),
-      // });
-      // const result = await response.json();
 
-      // For now, we'll just log the data
       console.log(data);
       Alert.alert('Success', 'Registration Successful');
       navigation.navigate('Login'); // Navigate to Login screen after successful registration
@@ -31,7 +20,7 @@ const Register = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Register</Text>
+      <Text style={styles.title}>Account</Text>
 
       <Controller
         control={control}

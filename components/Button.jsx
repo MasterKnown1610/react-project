@@ -12,9 +12,11 @@ const Button = ({ title, onPress, style, textStyle }) => {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#007BFF', // Default button color
+    backgroundColor: '#161488', // Default button color
     padding: 12, // Default padding
     borderRadius: 8, // Rounded corners
+    borderWidth: 1, // Border width
+    borderColor: 'white', // Border color
     alignItems: 'center', // Center text horizontally
     marginVertical: 8, // Vertical spacing
   },

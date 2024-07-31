@@ -11,10 +11,11 @@ const MainScreen = ({ navigation }) => {
         style={styles.image} 
       />
       <Text style={styles.title}>Master Known Market </Text>
+      <Text style={styles.title}>AI Online Market </Text>
       <View style={styles.buttonContainer}>
 
-      <Button title="Register" onPress={() => navigation.navigate('Register')} />
-      <Button title="Login" onPress={() => navigation.navigate('Login')} />
+      
+      <Button title="Login →" onPress={() => navigation.navigate('Login')} />
       </View>
     </View>
   );
@@ -23,16 +24,16 @@ const MainScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    
+    backgroundColor:'#161488',
     justifyContent: 'center',
     alignItems:'center',
     padding: 16,
-    gap:5,
-    backgroundColor:'#161488'
+   
+    
   },
   title: {
     fontSize: 24,
-    marginBottom: 16,
+    color: '#fff',
     textAlign: 'center',
   },
   button: {
