@@ -7,6 +7,7 @@ import Register from './screens/Register';
 import Login from './screens/Login'; // Assume you have a Login component
 import { StyleSheet, View } from 'react-native';
 import { enableScreens } from 'react-native-screens';
+import Otp from './screens/Otp';
 
 // Enable screens to improve memory usage and performance
 enableScreens();
@@ -23,6 +24,7 @@ const App = () => {
         <Stack.Screen name="Main" component={MainScreen} />
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="OTP" component={Otp}/>
       </Stack.Navigator>
     </NavigationContainer>
     </View>

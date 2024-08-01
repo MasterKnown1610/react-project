@@ -1,10 +1,11 @@
 // Login.js
 import React from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert, SafeAreaView, Image } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert, SafeAreaView, Image,TouchableOpacity,Linking } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { colors } from '../assets/color/colors';
 
 const Login = ({ navigation }) => {
+
   const { control, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = async (data) => {
@@ -13,11 +14,14 @@ const Login = ({ navigation }) => {
       console.log(data);
       Alert.alert('Success', 'Login Successful');
       // Navigate to the home screen or another screen after successful login
-      // navigation.navigate('Home');
+      navigation.navigate('OTP');
     } catch (error) {
       console.error(error);
       Alert.alert('Error', 'Invalid credentials!');
     }
+  };
+  const handleLinkPress = (url) => {
+    Linking.openURL(url);
   };
 
   return (
@@ -38,48 +42,57 @@ const Login = ({ navigation }) => {
         source={require('../assets/loginCart.png')}/>
       </View>
       <View style={styles.subBlockStyles}>  
-        <Text  style={{fontSize:20, fontWeight:'bold', color:colors.black}}>Account</Text>
-      <Controller
-        control={control}
-        rules={{ required: true }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-          style={styles.input}
-          placeholder="Email"
-          onBlur={onBlur}
-          onChangeText={onChange}
-            value={value}
-            />
-        )}
-        name="email"
-        defaultValue=""
-      />
-      {errors.email && <Text style={styles.error}>Email is required.</Text>}
+        <Text  style={{fontSize:20, fontWeight:'bold', color:colors.black, marginBottom:10}}>Account</Text>
+        <View style={{alignItems:'center'}}>
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+            pattern: {
+              value: /^\d{10}$/,
+              message: "Phone number must be 10 digits",
+    },
+  }}
+  render={({ field: { onChange, onBlur, value } }) => (
+    <TextInput
+      style={styles.input}
+      placeholder="Phone Number"
+      onBlur={onBlur}
+      onChangeText={onChange}
+      value={value}
+      keyboardType="phone-pad"
+      color={colors.black}
+    />
+  )}
+  name="phone"
+  defaultValue=""
+/>
+{errors.phone && <Text style={styles.error}>{errors.phone.message || 'Phone number is required.'}</Text>}
 
-
-      <Controller
-        control={control}
-        rules={{ required: true }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-          style={styles.input}
-          placeholder="Password"
-          secureTextEntry
-          onBlur={onBlur}
-          onChangeText={onChange}
-          value={value}
-          />
-        )}
-        name="password"
-        defaultValue=""
-        />
-      {errors.password && <Text style={styles.error}>Password is required.</Text>}
+      <View style={{justifyContent:'center', flexDirection:'row', alignItems:'center', marginTop:20}}>
+        <View style={styles.line}/>
+        <Text style={{fontWeight:'bold', paddingHorizontal:10}}> OR </Text>
+        <View style={styles.line}/>
+      </View>
       <View style={styles.socialmediaContainer} >
         <Image source={require('../assets/Google.png')}/>
         <Image source={require('../assets/Facebook.png')}/>
       </View>
-
+      </View>
+      <View  style={{alignItems:'center'}}>
+      <Text>By Login & Sign-Up, you agree to our </Text>
+      <Text style={styles.text}>
+        <TouchableOpacity onPress={() => handleLinkPress('https://www.google.com')}>
+          <Text style={styles.link}>Terms & Conditions </Text>
+        </TouchableOpacity>
+        {' '}and{' '}
+        <TouchableOpacity onPress={() => handleLinkPress('https://www.facebook.com')}>
+          <Text style={styles.link}>Privacy policy</Text>
+        </TouchableOpacity>
+      </Text>
+    </View>
       <Button title="Login" onPress={handleSubmit(onSubmit)} />
+      
       </View>
     </SafeAreaView>
   );
@@ -92,6 +105,15 @@ const styles = StyleSheet.create({
     backgroundColor:colors.primary
 
     
+  },
+  link: {
+    color: 'blue',
+    textDecorationLine: 'underline',
+  },
+  line: {
+    height: 2,
+    width:'40%',
+    backgroundColor: colors.line,
   },
   socialmediaContainer:{
     flexDirection:'row',
@@ -113,7 +135,8 @@ const styles = StyleSheet.create({
     backgroundColor:colors.white,
     padding:20,
     justifyContent:'space-between',
-    borderRadius:20,
+    borderTopRightRadius:20,
+    borderTopLeftRadius:20,
     flex:0.8,
 
   },
@@ -128,11 +151,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 12,
     paddingLeft: 8,
-    color:'white'
+    color:'white',
+    width:'80%'
   },
   error: {
     color: 'red',
     marginBottom: 8,
+  },
+  text: {
+    fontSize: 16,
   },
 });
 
