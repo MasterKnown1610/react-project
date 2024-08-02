@@ -10,11 +10,9 @@ const Login = ({ navigation }) => {
 
   const onSubmit = async (data) => {
     try {
- 
+     
+      navigation.navigate('OTP',{phoneNumber : data.phone});
       console.log(data);
-      Alert.alert('Success', 'Login Successful');
-      // Navigate to the home screen or another screen after successful login
-      navigation.navigate('OTP');
     } catch (error) {
       console.error(error);
       Alert.alert('Error', 'Invalid credentials!');

@@ -1,30 +1,42 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import OTPInputView from 'react-native-otp-inputs';
+import { useNavigation,useRoute } from '@react-navigation/native';
+import { colors } from '../assets/color/colors';
 
 const Otp = () => {
   const [otp, setOtp] = useState('');
+  const navigation = useNavigation();
+
+  const route = useRoute();
+  const { phoneNumber } = route.params;
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>OTP Screen</Text>
-      <View style={{flexDirection:'row'}}>
-{/* 
-      <OTPInputView
-        style={styles.otpInput}
-        pinCount={6} // Adjust the pin count as per your requirement
-        autoFocusOnLoad
-        codeInputFieldStyle={styles.otpField}
-        codeInputHighlightStyle={styles.otpFieldHighlight}
-        onCodeFilled={(code) => setOtp(code)}
-        /> */}
-        <OTPInputView
-          handleChange={(code) => console.log(code)}
-          numberOfInputs={4}
-          style={styles.otpInput}
-        />
+      <View style={styles.header}>
+      <TouchableOpacity 
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <Text style={styles.backButtonText}>Back</Text>
+        </TouchableOpacity>
+        <Text style={styles.title}>OTP Screen</Text>
+        
+      </View>
+      <View>
+       <Text style={{color:'black'}}> we Sent otp  to this 1 {phoneNumber}</Text>
+      </View>
+      <View style={{ alignItems: 'center' }}>
+        <View style={{ flexDirection: 'row' }}>
+          <OTPInputView
+            handleChange={(code) => setOtp(code)}
+            numberOfInputs={4}
+            style={styles.otpInput}
+            inputStyles={styles.otpField}
+          />
         </View>
-      <Text>Entered OTP: {otp}</Text>
+        <Text>Entered OTP: {otp}</Text>
+      </View>
     </View>
   );
 };
@@ -32,34 +44,43 @@ const Otp = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    backgroundColor: colors.white,
+  },
+  header: {
+    flexDirection: 'row',
+    gap:10,
     alignItems: 'center',
-    backgroundColor:'black'
+    padding: 20,
   },
   title: {
-    fontSize: 24,
-    marginBottom: 20,
+    fontSize: 20,
+    color:colors.black
+   
+  },
+  backButton: {
+    padding: 10,
+    backgroundColor: 'white',
+   
+  },
+  backButtonText: {
+    color: 'blue',
+    fontSize: 16,
   },
   otpInput: {
-    flexDirection:'row',
-    backgroundColor:'red',
-    gap:3,
-    width: 'fit-content',
-    height: 50,
-    borderWidth:1,
-    borderColor:'white'
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '80%',
+    marginBottom: 20,
   },
   otpField: {
-    width: 30,
+    width: 45,
     height: 45,
-    borderWidth: 1,
-    borderColor: '#000',
+    backgroundColor:'#D9D9D9',
     borderRadius: 5,
     color: '#000',
-  },
-  otpFieldHighlight: {
-    borderColor: '#03DAC6',
-    border:1,
+    textAlign: 'center',
+    fontSize: 18,
+    
   },
 });
 
