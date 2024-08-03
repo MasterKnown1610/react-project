@@ -1,30 +1,31 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import OTPInputView from 'react-native-otp-inputs';
-import { useNavigation,useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { colors } from '../assets/color/colors';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Otp = () => {
   const [otp, setOtp] = useState('');
   const navigation = useNavigation();
 
   const route = useRoute();
-  const { phoneNumber } = route.params;
+  const { phoneNumber, countryCode } = route.params;
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-      <TouchableOpacity 
+        <TouchableOpacity
           style={styles.backButton}
           onPress={() => navigation.goBack()}
         >
-          <Text style={styles.backButtonText}>Back</Text>
+          <Text><Icon name="home" size={30} color="#900" /></Text>
         </TouchableOpacity>
         <Text style={styles.title}>OTP Screen</Text>
-        
       </View>
-      <View>
-       <Text style={{color:'black'}}> we Sent otp  to this 1 {phoneNumber}</Text>
+      <View style={{ alignItems: 'center' }}>
+        <Text style={{ color: 'black' }}>We sent OTP to this</Text>
+        <Text style={{ color: 'black', fontWeight: 'bold' }}>+{countryCode} {phoneNumber}</Text>
       </View>
       <View style={{ alignItems: 'center' }}>
         <View style={{ flexDirection: 'row' }}>
@@ -48,19 +49,17 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    gap:10,
+    gap: 10,
     alignItems: 'center',
     padding: 20,
   },
   title: {
     fontSize: 20,
-    color:colors.black
-   
+    color: colors.black,
   },
   backButton: {
     padding: 10,
     backgroundColor: 'white',
-   
   },
   backButtonText: {
     color: 'blue',
@@ -75,12 +74,11 @@ const styles = StyleSheet.create({
   otpField: {
     width: 45,
     height: 45,
-    backgroundColor:'#D9D9D9',
+    backgroundColor: '#D9D9D9',
     borderRadius: 5,
     color: '#000',
     textAlign: 'center',
     fontSize: 18,
-    
   },
 });
 
