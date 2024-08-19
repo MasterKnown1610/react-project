@@ -1,16 +1,34 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import OTPInputView from 'react-native-otp-inputs';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { colors } from '../assets/color/colors';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Otp = () => {
   const [otp, setOtp] = useState('');
   const navigation = useNavigation();
-
   const route = useRoute();
   const { phoneNumber, countryCode } = route.params;
+
+  const handleOtpChange = (code) => {
+    setOtp(code);
+    if (code.length === 4) {
+      // Debounce validation to avoid rapid re-renders
+      setTimeout(() => validateOtp(code), 0);
+    }
+  };
+  
+
+  const validateOtp = (code) => {
+    // Replace this with your actual OTP validation logic
+    const expectedOtp = '1234'; // Example expected OTP
+    if (code === expectedOtp) {
+      navigation.navigate('Home'); // Navigate to the home page
+    } else {
+      Alert.alert('Invalid OTP', 'The OTP you entered is incorrect. Please try again.');
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -19,23 +37,21 @@ const Otp = () => {
           style={styles.backButton}
           onPress={() => navigation.goBack()}
         >
-          <Text><Icon name="home" size={30} color="#900" /></Text>
+          <MaterialCommunityIcons name="arrow-left" size={24} color="#000" />
         </TouchableOpacity>
         <Text style={styles.title}>OTP Screen</Text>
       </View>
-      <View style={{ alignItems: 'center' }}>
-        <Text style={{ color: 'black' }}>We sent OTP to this</Text>
-        <Text style={{ color: 'black', fontWeight: 'bold' }}>+{countryCode} {phoneNumber}</Text>
+      <View style={styles.infoContainer}>
+        <Text style={styles.infoText}>We sent OTP to this</Text>
+        <Text style={styles.infoTextBold}>+{countryCode} {phoneNumber}</Text>
       </View>
-      <View style={{ alignItems: 'center' }}>
-        <View style={{ flexDirection: 'row' }}>
-          <OTPInputView
-            handleChange={(code) => setOtp(code)}
-            numberOfInputs={4}
-            style={styles.otpInput}
-            inputStyles={styles.otpField}
-          />
-        </View>
+      <View style={styles.otpContainer}>
+        <OTPInputView
+          handleChange={handleOtpChange}
+          numberOfInputs={4}
+          style={styles.otpInput}
+          inputStyles={styles.otpField}
+        />
         <Text>Entered OTP: {otp}</Text>
       </View>
     </View>
@@ -49,21 +65,31 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    gap: 10,
     alignItems: 'center',
     padding: 20,
   },
   title: {
     fontSize: 20,
     color: colors.black,
+    flex: 1,
+    textAlign: 'center',
   },
   backButton: {
     padding: 10,
-    backgroundColor: 'white',
   },
-  backButtonText: {
-    color: 'blue',
-    fontSize: 16,
+  infoContainer: {
+    alignItems: 'center',
+    marginBottom: 40,
+  },
+  infoText: {
+    color: 'black',
+  },
+  infoTextBold: {
+    color: 'black',
+    fontWeight: 'bold',
+  },
+  otpContainer: {
+    alignItems: 'center',
   },
   otpInput: {
     flexDirection: 'row',

@@ -122,6 +122,4 @@ apply from: file("../../node_modules/@react-native-community/cli-platform-androi
 applyNativeModulesAppBuildGradle(project)
 
 // Ensure vectoricons configuration
-project.ext.vectoricons = [
-    enable: true
-]
+apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")
