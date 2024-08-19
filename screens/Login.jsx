@@ -3,6 +3,7 @@ import { View, Text, Button, StyleSheet, Alert, SafeAreaView, Image, TouchableOp
 import PhoneInput from 'react-native-phone-number-input';
 import { useForm, Controller } from 'react-hook-form';
 import { colors } from '../assets/color/colors';
+import google from '../assets/Google.png'
 
 
 const Login = ({ navigation }) => {
@@ -78,7 +79,7 @@ const Login = ({ navigation }) => {
             <View style={styles.line} />
           </View>
           <View style={styles.socialmediaContainer}>
-            <Image source={require('../assets/Google.png')} />
+            <Image source={google} alt='google' />
             <Image source={require('../assets/Facebook.png')} />
           </View>
         </View>

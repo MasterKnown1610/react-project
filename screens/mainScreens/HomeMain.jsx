@@ -39,6 +39,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import ImageSlider from '../components/ImageSlider';
 import Category from '../components/Category';
 import { colors } from '../../assets/color/colors';
+import Burger from '../../assets/burger.svg'
+import Buying from '../../assets/buying.svg'
 
 
 const HomeMain = () => {
@@ -52,7 +54,10 @@ const HomeMain = () => {
           <Text style={styles.needsText}>Your Needs</Text>
           <Text style={styles.aiText}>With Master’s Known.AI</Text>
         </View>
-       
+       <Burger width={150} height={200}/>
+      </View>
+      <View style={{height:130, backgroundColor:colors.opnColor, position:'relative',borderTopRightRadius:20,borderTopLeftRadius:20}}>
+          <Buying width={150} height={250} style={styles.buying}/>
       </View>
     </View>
   );
@@ -65,6 +70,10 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     flexDirection: 'row', // To align SVG and text in a row
     alignItems: 'center', // Vertically center the SVG and text
+  },
+  buying:{
+    position:'absolute',
+    top:-100,
   },
   planText: {
     fontSize: 30,

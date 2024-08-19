@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     },
     scrollContainer: {
         flexGrow: 1,
-        paddingBottom: 80, // Adjust this padding based on the height of DownNav
+        // paddingBottom: 80, // Adjust this padding based on the height of DownNav
         paddingTop:10,
     },
     emptyBg: {

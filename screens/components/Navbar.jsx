@@ -8,9 +8,9 @@ const Navbar = ( ) => {
     return(
         <LinearGradient
         colors={[
-            '#d16ba5', '#c777b9', '#ba83ca', '#aa8fd8', '#9a9ae1',
-            '#8aa7ec', '#79b3f4', '#69bff8', '#52cffe', '#41dfff',
-            '#46eefa', '#5ffbf1'
+            '#d16ba599', '#c777b999', '#ba83ca99', '#aa8fd899', '#9a9ae199',
+            '#8aa7ec99', '#79b3f499', '#69bff899', '#52cffe99', '#41dfff99',
+            '#46eefa99', '#5ffbf199'
         ]}
         start={{ x: 1, y: 0 }} 
             end={{ x: 0, y: 1 }}  
