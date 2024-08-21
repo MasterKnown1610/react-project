@@ -75,7 +75,7 @@ const Login = ({ navigation }) => {
           {errors.phone && <Text style={styles.error}>{errors.phone.message}</Text>}
           <View style={{ justifyContent: 'center', flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>
             <View style={styles.line} />
-            <Text style={{ fontWeight: 'bold', paddingHorizontal: 10 }}> OR </Text>
+            <Text style={{ fontWeight: 'bold', paddingHorizontal: 10, color:colors.black }}> OR </Text>
             <View style={styles.line} />
           </View>
           <View style={styles.socialmediaContainer}>

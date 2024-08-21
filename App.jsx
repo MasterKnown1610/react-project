@@ -22,10 +22,10 @@ const App = () => {
     <View style={styles.container}>
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
-        {/* <Stack.Screen name="Main" component={MainScreen} />
-        <Stack.Screen name="Register" component={Register} />
+        <Stack.Screen name="Main" component={MainScreen} />
+       
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="OTP" component={Otp}/> */}
+        <Stack.Screen name="OTP" component={Otp}/>
         <Stack.Screen name="Home" component={Home} /> 
       </Stack.Navigator>
     </NavigationContainer>
